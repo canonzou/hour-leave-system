@@ -181,7 +181,7 @@
         new Vue({
             el: '#app',
             data: {
-                // API地址（已修正，带/api后缀）
+                // 请将此处替换为你在PythonAnywhere的实际域名
                 API_URL: 'https://canon.pythonanywhere.com/api',
                 username: '',
                 isLoggedIn: false,
@@ -207,7 +207,6 @@
                         return;
                     }
 
-                    // 发送登录请求（正确的API地址）
                     fetch(this.API_URL, {
                         method: 'POST',
                         headers: {
@@ -217,7 +216,7 @@
                             type: 'get',
                             username: this.username.trim()
                         }),
-                        mode: 'cors' // 明确启用CORS模式
+                        mode: 'cors'
                     })
                     .then(response => {
                         if (!response.ok) {
@@ -243,7 +242,6 @@
                 // 提交加班记录
                 submitOvertime() {
                     this.clearMessages();
-                    // 转换datetime-local格式为后端需要的"YYYY-MM-DD HH:MM"
                     const formatTime = (datetimeLocal) => {
                         if (!datetimeLocal) return '';
                         return datetimeLocal.replace('T', ' ');
@@ -281,7 +279,6 @@
                         if (data.success) {
                             this.remainingHours = data.remainingHours;
                             this.successMessage = data.message || '加班记录提交成功';
-                            // 重置表单
                             this.overtimeStart = '';
                             this.overtimeEnd = '';
                             this.reason = '';
@@ -334,7 +331,6 @@
                         if (data.success) {
                             this.remainingHours = data.remainingHours;
                             this.successMessage = data.message || '补休记录提交成功';
-                            // 重置表单
                             this.leaveStart = '';
                             this.leaveEnd = '';
                         } else {
